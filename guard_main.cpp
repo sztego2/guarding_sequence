@@ -12,7 +12,8 @@ struct guard_time {
 
 int main (){
 
-    vector<string> names = {"Ringhofer Zsolt","Ringhofer Csaba","Berényi Lilla","Sirokai Soma","Bacskó Zétény"};
+    vector<string> names = {"Ringhofer Zsolt","Ringhofer Csaba","Berényi Lilla",
+    "Sirokai Soma","Bacskó Zétény","Tóth Marcell","Nagy Levente","Kecskés Bence"};
     vector<guard_time> pairs;
     int start_day = 1;
     int start_time = 12;
@@ -30,12 +31,12 @@ int main (){
             act.hour_time = hour;
 
             int name1Index = rand() % actNames.size();
-            act.name1 = names[name1Index];
+            act.name1 = actNames[name1Index];
             actNames.erase(actNames.begin() + name1Index);
             if (actNames.size() == 0) actNames = names;
 
             int name2Index = rand() % actNames.size();
-            act.name2 = names[name2Index];
+            act.name2 = actNames[name2Index];
             actNames.erase(actNames.begin() + name2Index);
             if (actNames.size() == 0) actNames = names;
 
