@@ -1,4 +1,6 @@
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <vector>
 #include <string>
 
@@ -101,6 +103,9 @@ vector<nameAttr> populateNotAllowedNames (vector<nameAttr> names, int day, int h
 
 int main (){
 
+    vector<nameAttr> names;
+
+    /*
     vector<nameAttr> names = {
     {"Ringhofer Zsolt",1,'m',false,false,false,false},
     {"Ringhofer Csaba",1,'m',false,false,false,false},
@@ -115,6 +120,41 @@ int main (){
     {"Kováts Károly",1,'s',false,false,false,false},
     {"Tóth Béla",4,'s',true,true,false,false}
     };
+    */
+
+    ifstream inputFile;
+    inputFile.open("C:\\_RZS\\Projects\\guarding_sequence\\inputFile.csv");
+    string line = "";
+    
+    while (getline(inputFile,line)){
+
+        string tempForNonStringElements;
+        stringstream inputString (line);
+        nameAttr inputNames;
+
+        getline(inputString, inputNames.name, ',');
+        getline(inputString, tempForNonStringElements, ',');
+        inputNames.rank = atoi(tempForNonStringElements.c_str());
+
+        getline(inputString, tempForNonStringElements, ',');
+        inputNames.masterOrStudent = tempForNonStringElements[0];
+
+        getline(inputString, tempForNonStringElements, ',');
+        istringstream(tempForNonStringElements) >> boolalpha >> inputNames.isTakingExam;
+
+        getline(inputString, tempForNonStringElements, ',');
+        istringstream(tempForNonStringElements) >> boolalpha >> inputNames.isTakingBrownExam;
+
+        getline(inputString, tempForNonStringElements, ',');
+        istringstream(tempForNonStringElements) >> boolalpha >> inputNames.isUnderage;
+
+        getline(inputString, tempForNonStringElements, ',');
+        istringstream(tempForNonStringElements) >> boolalpha >> inputNames.isTakingMokuso;
+
+        names.push_back(inputNames);
+        line = "";
+    }
+
     
     vector<guard_time> pairs;
     int start_day = 1;
