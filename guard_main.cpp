@@ -198,9 +198,15 @@ int main (){
         }
     }
 
+    ofstream outputFile;
+    outputFile.open("C:\\_RZS\\Projects\\guarding_sequence\\outputFile.csv");
+    outputFile  << "Nap,Óra,Név1,Név2\n";
     for (auto i : pairs){
-        cout  << i.day << " " << i.hour_time << " " << i.name1 << " " << i.name2 << endl;
+        outputFile  << i.day << "," << i.hour_time << "," << i.name1 << "," << i.name2 << "\n";
     }
+
+
+    outputFile.close();
  
     return 0;
 };
