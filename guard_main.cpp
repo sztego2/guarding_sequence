@@ -104,24 +104,6 @@ vector<nameAttr> populateNotAllowedNames (vector<nameAttr> names, int day, int h
 int main (){
 
     vector<nameAttr> names;
-
-    /*
-    vector<nameAttr> names = {
-    {"Ringhofer Zsolt",1,'m',false,false,false,false},
-    {"Ringhofer Csaba",1,'m',false,false,false,false},
-    {"Berényi Lilla",8,'s',true,false,false,false},
-    {"Sirokai Soma",6,'s',true,false,false,false},
-    {"Bacskó Zétény",8,'s',true,false,false,false},
-    {"Tóth Marcell",8,'s',true,false,false,false},
-    {"Nagy Levente",8,'s',true,false,false,false},
-    {"Kecskés Bence",9,'s',true,false,false,true},
-    {"Leloup Aaron",9,'s',true,false,true,true},
-    {"Horváth Ágoston",9,'s',true,false,false,true},
-    {"Kováts Károly",1,'s',false,false,false,false},
-    {"Tóth Béla",4,'s',true,true,false,false}
-    };
-    */
-
     ifstream inputFile;
     inputFile.open("C:\\_RZS\\Projects\\guarding_sequence\\inputFile.csv");
     string line = "";
