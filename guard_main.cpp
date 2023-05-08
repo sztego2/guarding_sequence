@@ -3,6 +3,9 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <unordered_map>
+#include <random>
+#include <chrono>
 
 using namespace std;
 
@@ -33,6 +36,13 @@ struct nameAttr {
     bool isUnderage;
     bool isTakingMokuso;
 };
+
+
+struct guard {
+    int nameId;
+    int hasBeenGuardCnt;
+    int hasBeenNightGuardCnt;
+}
 
 struct guard_time {
     int day;
@@ -98,15 +108,23 @@ vector<nameAttr> populateNotAllowedNames (vector<nameAttr> names, int day, int h
     return notAllowedNames;
 }
 
+bool isAllowed (int nameId){
+
+
+
+}
+
 
 
 
 int main (){
 
-    vector<nameAttr> names;
+    unordered_map<int,nameAttr> names;
+    //vector<nameAttr> names;
     ifstream inputFile;
     inputFile.open("C:\\_RZS\\Projects\\guarding_sequence\\inputFile.csv");
     string line = "";
+    int nameId = 0;
     
     while (getline(inputFile,line)){
 
@@ -133,16 +151,98 @@ int main (){
         getline(inputString, tempForNonStringElements, ',');
         istringstream(tempForNonStringElements) >> boolalpha >> inputNames.isTakingMokuso;
 
-        names.push_back(inputNames);
+        names[i] = inputNames;
         line = "";
     }
 
-    
+    vector<guard> guards;
+
+    for (auto i = names.begin(); i != names.end(); i++){
+        guard actName;
+        actName.nameId = i;
+        actName.hasBeenGuardCnt = 0;
+        actName.hasBeenNightGuardCnt = 0;
+        guards.push_back(actName);
+    }
+
+    unsigned seed = chrono::system_clock::now().time_since_epoch().count();
+    default_random_engine e(seed);
+    shuffle(guards.begin(),guards.end(),e);
+
     vector<guard_time> pairs;
     int start_day = 1;
     int start_time = 12;
     int end_day = 5;
     int end_time = 14;
+    bool nightTime = false;
+
+    for (int day = start_day; day <= end_day; day++){
+        int first_hour = 0, last_hour = 22;
+        if (day == start_day) first_hour = start_time;
+        if (day == end_day) last_hour = end_time;
+        for (int hour = first_hour; hour <= last_hour; hour = hour + 2){
+            if (hour >= 22 || hour <= 4) nightTime == true;
+            guard_time actPair;
+            actPair.day = day;
+            actPair.hour_time = hour;
+            int a = 0;
+            int minGuardTimeCnt = guards[0].hasBeenGuardCnt;
+            int minNightGuardTimeCnt = guards[0].hasBeenNightGuardCnt;
+            int minIndex = 0;
+            for (int i = guards.begin(); i != guards.end(); i++){
+                // if (i.hasBeenNightGuardCnt < minNightGuardTimeCnt) minNightGuardTimeCnt = i.hasBeenNightGuardCnt;
+                if (isAllowed(guards[i]) && i.hasBeenGuardCnt < minGuardTimeCnt) minGuardTimeCnt = i.hasBeenGuardCnt;
+                minIndex = i;
+            }
+            if (a == 0){
+                actPair.name1 = names[guards[minIndex].nameId].name;
+                a++;
+                guards[minIndex].hasBeenGuardCnt++;
+                if (nightTime) guards[minIndex].hasBeenNightGuardCnt++;
+            } else {
+                actPair.name2 = names[guards[minIndex].nameId].name;
+                a--;
+                guards[minIndex].hasBeenGuardCnt++;
+                if (nightTime) guards[minIndex].hasBeenNightGuardCnt++;
+            }
+                    
+                }
+            }    
+        
+        
+        
+        }
+
+/*
+
+    int a = 0;
+
+    for (auto i : guards){
+        guard_time act;
+        act.day = actDay;
+        act.hour_time = actHour;
+        if (a == 0){
+            act.name1 = names[i.nameId].name;
+            a++;
+        }
+        else {
+            act.name2 = names[i.nameId].name;
+            a--;
+        }
+        if (actHour == 22){
+
+        }
+    }
+*/
+
+
+
+
+
+
+
+
+
 
     vector<nameAttr> actNames = names;
     vector<nameAttr> notAllowedNames;
