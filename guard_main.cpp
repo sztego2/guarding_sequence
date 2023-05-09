@@ -54,8 +54,6 @@ struct guard_time {
 
 bool isAllowed (int nameId, unordered_map<int,nameAttr> names, int day, int hour, bool nightTime){
     nameAttr candidate = names[nameId];
-    // masters can't be guards
-    if (candidate.masterOrStudent = 'm') return false;
     // underage at night shouldn't be guards
     if(nightTime && candidate.isUnderage) return false;
     // if it's mokuso time and the candidate takes it, he/she shouldn't be guard.
@@ -74,6 +72,7 @@ int main (){
     unordered_map<int,nameAttr> names;
     ifstream inputFile;
     inputFile.open("C:\\_RZS\\Projects\\guarding_sequence\\inputFile.csv");
+    inputFile.ignore(numeric_limits<streamsize>::max(),'\n');
     string line = "";
     int nameId = 0;
     nameAttr inputName1;
@@ -111,11 +110,13 @@ int main (){
     vector<guard> guards;
 
     for (auto i = names.begin(); i != names.end(); i++){
-        guard actName;
-        actName.nameId = i->first;
-        actName.hasBeenGuardCnt = 0;
-        actName.hasBeenNightGuardCnt = 0;
-        guards.push_back(actName);
+        if (i->second.masterOrStudent == 't'){
+            guard actName;
+            actName.nameId = i->first;
+            actName.hasBeenGuardCnt = 0;
+            actName.hasBeenNightGuardCnt = 0;
+            guards.push_back(actName);
+        }
     }
 
     unsigned seed = chrono::system_clock::now().time_since_epoch().count();
@@ -134,7 +135,8 @@ int main (){
         if (day == start_day) first_hour = start_time;
         if (day == end_day) last_hour = end_time;
         for (int hour = first_hour; hour <= last_hour; hour = hour + 2){
-            if (hour >= 22 || hour <= 4) nightTime == true;
+            if (hour >= 22 || hour <= 4) nightTime = true;
+            else nightTime = false;
             guard_time actPair;
             actPair.day = day;
             actPair.hour_time = hour;
@@ -144,13 +146,15 @@ int main (){
             int minIndex = 0;
             // name1
             for (auto i = guards.begin(); i != guards.end(); i++){
-                if (isAllowed(i->nameId,names,day,hour,nightTime) && (i->hasBeenGuardCnt < minGuardTimeCnt)){
+                if ((i->hasBeenGuardCnt < minGuardTimeCnt) && isAllowed(i->nameId,names,day,hour,nightTime)){
                     minGuardTimeCnt = i->hasBeenGuardCnt;
                     minNameID = i->nameId;
                     minIndex = distance(guards.begin(),i);
                 }
-                if (nightTime && i->hasBeenNightGuardCnt < minNightGuardTimeCnt){
+                if (nightTime && i->hasBeenGuardCnt == minGuardTimeCnt && i->hasBeenNightGuardCnt < minNightGuardTimeCnt && isAllowed(i->nameId,names,day,hour,nightTime)){
                     minNightGuardTimeCnt = i->hasBeenNightGuardCnt;
+                    minNameID = i->nameId;
+                    minIndex = distance(guards.begin(),i);
                 }
             }
             actPair.name1 = names[minNameID].name;
@@ -162,13 +166,15 @@ int main (){
             minNameID = guards[0].nameId;
             minIndex = 0;
             for (auto i = guards.begin(); i != guards.end(); i++){
-                if (isAllowed(i->nameId,names,day,hour,nightTime) && (i->hasBeenGuardCnt < minGuardTimeCnt)){
+                if ((i->hasBeenGuardCnt < minGuardTimeCnt) && isAllowed(i->nameId,names,day,hour,nightTime)){
                     minGuardTimeCnt = i->hasBeenGuardCnt;
                     minNameID = i->nameId;
                     minIndex = distance(guards.begin(),i);
                 }
-                if (nightTime && i->hasBeenNightGuardCnt < minNightGuardTimeCnt){
+                if (nightTime && i->hasBeenGuardCnt == minGuardTimeCnt && i->hasBeenNightGuardCnt < minNightGuardTimeCnt && isAllowed(i->nameId,names,day,hour,nightTime)){
                     minNightGuardTimeCnt = i->hasBeenNightGuardCnt;
+                    minNameID = i->nameId;
+                    minIndex = distance(guards.begin(),i);
                 }
             }
             actPair.name2 = names[minNameID].name;
