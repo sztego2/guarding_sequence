@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <random>
 #include <chrono>
+#include <algorithm>
 
 using namespace std;
 
@@ -42,7 +43,7 @@ struct guard {
     int nameId;
     int hasBeenGuardCnt;
     int hasBeenNightGuardCnt;
-}
+};
 
 struct guard_time {
     int day;
@@ -51,107 +52,59 @@ struct guard_time {
     string name2;
 };
 
-vector<nameAttr> populateAllowedNames (vector<nameAttr> names, vector<nameAttr> notAllowedNames){
-    vector<nameAttr> allowedNames;
-    for (auto i : names) allowedNames.push_back(i);
-    for (int i = 0; i < notAllowedNames.size(); i++){
-        for (int j = 0; j < allowedNames.size(); j++){
-            if (allowedNames[j].name == notAllowedNames[i].name){
-                allowedNames.erase(allowedNames.begin() + j);
-                break;
-            }
-        }        
-    }
-    return allowedNames;
+bool isAllowed (int nameId, unordered_map<int,nameAttr> names, int day, int hour, bool nightTime){
+    nameAttr candidate = names[nameId];
+    // masters can't be guards
+    if (candidate.masterOrStudent = 'm') return false;
+    // underage at night shouldn't be guards
+    if(nightTime && candidate.isUnderage) return false;
+    // if it's mokuso time and the candidate takes it, he/she shouldn't be guard.
+    if(day == mokusoDay && hour >= mokusoTimeStart && hour <= mokusoTimeEnd && candidate.isTakingMokuso) return false;
+    // if it's brown exam time and the candidate takes it, he/she shouldn't be guard.
+    if(day == brownExamDay && hour >= brownExamTimeStart && hour <= brownExamTimeEnd && candidate.isTakingBrownExam) return false; 
+    // if it's physical exam time and the candidate takes it, he/she shouldn't be guard.
+    if(day == physicalExamDay && hour >= physicalExamTimeStart && hour <= physicalExamTimeEnd && candidate.isTakingExam) return false; 
+
+    return true;
 }
-
-vector<nameAttr> populateNotAllowedNames (vector<nameAttr> names, int day, int hour){
-    vector<nameAttr> notAllowedNames;
-    //masters can't be guards
-    for (int i = 0; i < names.size(); i++){
-        if (names[i].masterOrStudent == 'm') {
-            notAllowedNames.push_back(names[i]);
-        }
-    }            
-    //if it's brown belt exam time, remove related students
-    if (day == brownExamDay && hour >= brownExamTimeStart && hour <= brownExamTimeEnd){
-        for (int i = 0; i < names.size(); i++){
-            if (names[i].isTakingBrownExam){
-                notAllowedNames.push_back(names[i]);
-            }
-        }
-    }
-    //if it's mokuso time, remove related students
-        if (day == mokusoDay && hour >= mokusoTimeStart && hour <= mokusoTimeEnd){
-        for (int i = 0; i < names.size(); i++){
-            if (names[i].isTakingMokuso){
-                notAllowedNames.push_back(names[i]);
-            }
-        }
-    }
-    //if it's physical exam time, remove related students
-        if (day == physicalExamDay && hour >= physicalExamTimeStart && hour <= physicalExamTimeEnd){
-        for (int i = 0; i < names.size(); i++){
-            if (names[i].isTakingExam){
-                notAllowedNames.push_back(names[i]);
-            }
-        }
-    }
-    //if it's night time, underages shouldn't be guards
-        if (hour >=  nightStartTime || hour <= nightEndTime){
-        for (int i = 0; i < names.size(); i++){
-            if (names[i].isUnderage){
-                notAllowedNames.push_back(names[i]);
-            }
-        }
-    }
-    return notAllowedNames;
-}
-
-bool isAllowed (int nameId){
-
-
-
-}
-
-
 
 
 int main (){
 
     unordered_map<int,nameAttr> names;
-    //vector<nameAttr> names;
     ifstream inputFile;
     inputFile.open("C:\\_RZS\\Projects\\guarding_sequence\\inputFile.csv");
     string line = "";
     int nameId = 0;
-    
+    nameAttr inputName1;
+
     while (getline(inputFile,line)){
 
         string tempForNonStringElements;
         stringstream inputString (line);
-        nameAttr inputNames;
+        nameAttr inputName;
 
-        getline(inputString, inputNames.name, ',');
+        getline(inputString, inputName.name, ',');
         getline(inputString, tempForNonStringElements, ',');
-        inputNames.rank = atoi(tempForNonStringElements.c_str());
-
-        getline(inputString, tempForNonStringElements, ',');
-        inputNames.masterOrStudent = tempForNonStringElements[0];
+        inputName.rank = atoi(tempForNonStringElements.c_str());
 
         getline(inputString, tempForNonStringElements, ',');
-        istringstream(tempForNonStringElements) >> boolalpha >> inputNames.isTakingExam;
+        inputName.masterOrStudent = tempForNonStringElements[0];
 
         getline(inputString, tempForNonStringElements, ',');
-        istringstream(tempForNonStringElements) >> boolalpha >> inputNames.isTakingBrownExam;
+        istringstream(tempForNonStringElements) >> boolalpha >> inputName.isTakingExam;
 
         getline(inputString, tempForNonStringElements, ',');
-        istringstream(tempForNonStringElements) >> boolalpha >> inputNames.isUnderage;
+        istringstream(tempForNonStringElements) >> boolalpha >> inputName.isTakingBrownExam;
 
         getline(inputString, tempForNonStringElements, ',');
-        istringstream(tempForNonStringElements) >> boolalpha >> inputNames.isTakingMokuso;
+        istringstream(tempForNonStringElements) >> boolalpha >> inputName.isUnderage;
 
-        names[i] = inputNames;
+        getline(inputString, tempForNonStringElements, ',');
+        istringstream(tempForNonStringElements) >> boolalpha >> inputName.isTakingMokuso;
+
+        names[nameId] = inputName;
+        nameId++;
         line = "";
     }
 
@@ -159,7 +112,7 @@ int main (){
 
     for (auto i = names.begin(); i != names.end(); i++){
         guard actName;
-        actName.nameId = i;
+        actName.nameId = i->first;
         actName.hasBeenGuardCnt = 0;
         actName.hasBeenNightGuardCnt = 0;
         guards.push_back(actName);
@@ -185,118 +138,46 @@ int main (){
             guard_time actPair;
             actPair.day = day;
             actPair.hour_time = hour;
-            int a = 0;
             int minGuardTimeCnt = guards[0].hasBeenGuardCnt;
             int minNightGuardTimeCnt = guards[0].hasBeenNightGuardCnt;
+            int minNameID = guards[0].nameId;
             int minIndex = 0;
-            for (int i = guards.begin(); i != guards.end(); i++){
-                // if (i.hasBeenNightGuardCnt < minNightGuardTimeCnt) minNightGuardTimeCnt = i.hasBeenNightGuardCnt;
-                if (isAllowed(guards[i]) && i.hasBeenGuardCnt < minGuardTimeCnt) minGuardTimeCnt = i.hasBeenGuardCnt;
-                minIndex = i;
-            }
-            if (a == 0){
-                actPair.name1 = names[guards[minIndex].nameId].name;
-                a++;
-                guards[minIndex].hasBeenGuardCnt++;
-                if (nightTime) guards[minIndex].hasBeenNightGuardCnt++;
-            } else {
-                actPair.name2 = names[guards[minIndex].nameId].name;
-                a--;
-                guards[minIndex].hasBeenGuardCnt++;
-                if (nightTime) guards[minIndex].hasBeenNightGuardCnt++;
-            }
-                    
+            // name1
+            for (auto i = guards.begin(); i != guards.end(); i++){
+                if (isAllowed(i->nameId,names,day,hour,nightTime) && (i->hasBeenGuardCnt < minGuardTimeCnt)){
+                    minGuardTimeCnt = i->hasBeenGuardCnt;
+                    minNameID = i->nameId;
+                    minIndex = distance(guards.begin(),i);
                 }
-            }    
-        
-        
-        
-        }
-
-/*
-
-    int a = 0;
-
-    for (auto i : guards){
-        guard_time act;
-        act.day = actDay;
-        act.hour_time = actHour;
-        if (a == 0){
-            act.name1 = names[i.nameId].name;
-            a++;
-        }
-        else {
-            act.name2 = names[i.nameId].name;
-            a--;
-        }
-        if (actHour == 22){
-
-        }
-    }
-*/
-
-
-
-
-
-
-
-
-
-
-    vector<nameAttr> actNames = names;
-    vector<nameAttr> notAllowedNames;
-    vector<nameAttr> allowedNames;
-
-    for (int day = start_day; day <= end_day; day++){
-        int first_hour = 0, last_hour = 22;
-        if (day == start_day) first_hour = start_time;
-        if (day == end_day) last_hour = end_time;
-        for (int hour = first_hour; hour <= last_hour; hour = hour + 2){
-            notAllowedNames = populateNotAllowedNames(names,day,hour);
-            allowedNames = populateAllowedNames(names,notAllowedNames);
-            actNames = populateAllowedNames(actNames,notAllowedNames);
-            //if the namelist becomes empty, refill it with everyone allowed                       
-            if (actNames.size() == 0) actNames = allowedNames;
-
-            guard_time act;
-            act.day = day;
-            act.hour_time = hour;
-
-            int name1Index = rand() % actNames.size();
-            act.name1 = actNames[name1Index].name;
-            actNames.erase(actNames.begin() + name1Index);
-            if (actNames.size() == 0) actNames = allowedNames;
-            if (actNames.size() > 1){
-                for (int i = 0; i < actNames.size(); i++){
-                    if (actNames[i].name == act.name1){
-                        actNames.erase(actNames.begin() + i);
-                        break;
-                    }
+                if (nightTime && i->hasBeenNightGuardCnt < minNightGuardTimeCnt){
+                    minNightGuardTimeCnt = i->hasBeenNightGuardCnt;
                 }
             }
-
-            int name2Index = rand() % actNames.size();
-            act.name2 = actNames[name2Index].name;
-            actNames.erase(actNames.begin() + name2Index);
-            if (actNames.size() == 0) actNames = allowedNames;
-            if (actNames.size() > 1){
-                for (int i = 0; i < actNames.size(); i++){
-                    if (actNames[i].name == act.name2){
-                        actNames.erase(actNames.begin() + i);
-                        break;
-                    }
+            actPair.name1 = names[minNameID].name;
+            guards[minIndex].hasBeenGuardCnt++;
+            if (nightTime) guards[minIndex].hasBeenNightGuardCnt++;
+            // name2
+            minGuardTimeCnt = guards[0].hasBeenGuardCnt;
+            minNightGuardTimeCnt = guards[0].hasBeenNightGuardCnt;
+            minNameID = guards[0].nameId;
+            minIndex = 0;
+            for (auto i = guards.begin(); i != guards.end(); i++){
+                if (isAllowed(i->nameId,names,day,hour,nightTime) && (i->hasBeenGuardCnt < minGuardTimeCnt)){
+                    minGuardTimeCnt = i->hasBeenGuardCnt;
+                    minNameID = i->nameId;
+                    minIndex = distance(guards.begin(),i);
+                }
+                if (nightTime && i->hasBeenNightGuardCnt < minNightGuardTimeCnt){
+                    minNightGuardTimeCnt = i->hasBeenNightGuardCnt;
                 }
             }
+            actPair.name2 = names[minNameID].name;
+            guards[minIndex].hasBeenGuardCnt++;
+            if (nightTime) guards[minIndex].hasBeenNightGuardCnt++;
 
-
-            pairs.push_back(act);
-
-            //put back temporarily removed names
-            actNames.insert(end(actNames),begin(notAllowedNames),end(notAllowedNames));
-            notAllowedNames = {};
+            pairs.push_back(actPair);          
         }
-    }
+    }    
 
     ofstream outputFile;
     outputFile.open("C:\\_RZS\\Projects\\guarding_sequence\\outputFile.csv");
