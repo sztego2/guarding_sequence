@@ -11,21 +11,21 @@
 using namespace std;
 
 // exam times
-const int brownExamDay = 4;
-const int brownExamTimeStart = 15;
-const int brownExamTimeEnd = 17;
+int brownExamDay;
+int brownExamTimeStart;
+int brownExamTimeEnd;
 
-const int mokusoDay = 4;
-const int mokusoTimeStart = 15;
-const int mokusoTimeEnd = 17;
+int mokusoDay;
+int mokusoTimeStart;
+int mokusoTimeEnd;
 
-const int physicalExamDay = 5;
-const int physicalExamTimeStart = 8;
-const int physicalExamTimeEnd = 10;
+int physicalExamDay;
+int physicalExamTimeStart;
+int physicalExamTimeEnd;
 
 // no-underage night hours
-const int nightStartTime = 22;
-const int nightEndTime = 6;
+int nightStartTime;
+int nightEndTime;
 
 
 struct nameAttr {
@@ -69,9 +69,48 @@ bool isAllowed (int nameId, unordered_map<int,nameAttr> names, int day, int hour
 
 int main (){
 
+    //main parameters
+    //start and end of guarding
+    int start_day = 1;
+    int start_time = 12;
+    int end_day = 5;
+    int end_time = 14;
+
+    //exception hours
+    brownExamDay = 4;
+    brownExamTimeStart = 15;
+    brownExamTimeEnd = 17;
+
+    mokusoDay = 4;
+    mokusoTimeStart = 15;
+    mokusoTimeEnd = 17;
+
+    physicalExamDay = 5;
+    physicalExamTimeStart = 6;
+    physicalExamTimeEnd = 8;
+
+    // no-underage night hours
+    nightStartTime = 22;
+    nightEndTime = 6;
+
+    ifstream inputParameters;
+    inputParameters.open("inputParameters.csv");
+    inputParameters.ignore(numeric_limits<streamsize>::max(),'\n');
+    string lineParam = "";
+
+    while (getline(inputParameters,lineParam)){
+
+        string tempForNumbers;
+        stringstream inputParameters(lineParam);
+
+
+    }
+
+
+
     unordered_map<int,nameAttr> names;
     ifstream inputFile;
-    inputFile.open("C:\\_RZS\\Projects\\guarding_sequence\\inputFile.csv");
+    inputFile.open("inputFile.csv");
     inputFile.ignore(numeric_limits<streamsize>::max(),'\n');
     string line = "";
     int nameId = 0;
@@ -124,10 +163,6 @@ int main (){
     shuffle(guards.begin(),guards.end(),e);
 
     vector<guard_time> pairs;
-    int start_day = 1;
-    int start_time = 12;
-    int end_day = 5;
-    int end_time = 14;
     bool nightTime = false;
 
     for (int day = start_day; day <= end_day; day++){
@@ -186,7 +221,7 @@ int main (){
     }    
 
     ofstream outputFile;
-    outputFile.open("C:\\_RZS\\Projects\\guarding_sequence\\outputFile.csv");
+    outputFile.open("outputFile.csv");
     outputFile  << "Nap,Óra,Név1,Név2\n";
     for (auto i : pairs){
         outputFile  << i.day << "," << i.hour_time << "," << i.name1 << "," << i.name2 << "\n";
