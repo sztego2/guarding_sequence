@@ -1,28 +1,65 @@
 Név,Fokozat,Mester vagy tanítvány (m/t),Vizsgázik?,Barnára vizsgázik?,Kiskorú?,Ül mokuso-t?
-Ringhofer Zsolt,1,m,false,false,false,false
-Ringhofer Csaba,1,m,false,false,false,false
-Berényi Lilla,8,t,true,false,false,false
-Sirokai Soma,6,t,true,false,false,false
-Bacskó Zétény,8,t,true,false,false,false
-Tóth Marcell,8,t,true,false,false,false
-Nagy Levente,8,t,true,false,false,false
-Kecskés Bence,9,t,true,false,false,true
-Leloup Aaron,9,t,true,false,true,true
-Leloup Maxim,9,t,true,false,true,true
-Horváth Ágoston,9,t,true,false,false,true
-Kovács Károly,1,t,false,false,false,false
-Tóth Béla,4,t,true,true,false,false
-Kötél Zsigmond,9,t,true,false,false,true
-Keltai Dóra,9,t,true,false,false,true
-Bacskó Gergő,9,t,true,false,false,true
-Sárkány Viktor,9,t,true,false,false,true
-Pór-Farkas Medárd,9,t,true,false,true,true
-Szendrei Ábel,9,t,true,false,true,true
-Szendrei Márton,9,t,true,false,false,true
-Tóth Olivér,9,t,true,false,true,true
-Janisch Ádám,7,t,true,false,false,true
-Pásztor Anna,1,t,false,false,false,false
-Jankovics Szilvia,1,t,false,false,false,false
-Némedi Ákos,1,t,false,false,false,false
-Németh György,1,t,false,false,false,false
-Németh Csilla,1,t,false,false,false,false
+Bézi Richárd,2. dan,m,false,false,false,false
+Hunyadi Lehel Attila,1. dan,m,false,false,false,false
+Kovács Tibor ,1. dan,m,false,false,false,false
+Movik Máté,3.dan,m,false,false,false,false
+Murányi Roland,3.dan,m,false,false,false,false
+Pintér Zoltán,4. dan,m,false,false,false,false
+Ringhofer Zsolt,1. dan,m,false,false,false,false
+Sárga Richárd,5. dan,m,false,false,false,false
+Szemán Tamás ,3.dan,m,false,false,false,false
+Viszkok Viktória ,1. dan,m,false,false,false,false
+Al-Assaf Meymoona,10. kyu,t,true,false,false,true
+Bacsko Zeteny,8. kyu,t,true,false,false,false
+Bartos Tamás ,6. kyu,t,true,false,false,false
+Besenyei Csaba ,8. kyu,t,true,false,false,false
+Bezzeg Norbert,6. kyu,t,true,false,false,false
+Burján Tímea,9. kyu,t,true,false,false,true
+Csamangó Zsolt ,6. kyu,t,true,false,false,false
+Csósza Zalán László,8. kyu,t,true,false,false,false
+Détári Péter,9. kyu,t,true,false,false,true
+Dóczy László,8. kyu,t,true,false,false,false
+Dóczy Lilla,8. kyu,t,true,false,false,false
+Falcsik Gergő,9. kyu,t,true,false,false,true
+Farkas Alexandra,10. kyu,t,true,false,false,true
+Farkas Zoltán Zsigmond,8. kyu,t,true,false,false,false
+Fejér György,8. kyu,t,true,false,false,false
+Fekete Réka Boglárka,10. kyu,t,true,false,false,true
+Gere Tamás,8. kyu,t,true,false,false,false
+Gubán Ákos ,8. kyu,t,true,false,false,false
+Horváth Ágoston,9. kyu,t,true,false,false,true
+Horváth István,4. kyu,t,true,true,false,false
+Hunyadi Ivett ,9. kyu,t,true,false,false,true
+Jankovics Szilvia Mária,1. kyu,t,true,false,false,false
+Karsai János,9. dan,m,false,false,false,false
+Kiss Rebeka,9. kyu,t,true,false,false,true
+Kolozsvári Barnabás,6. kyu,t,true,false,false,false
+Kötél Zsigmond Lajos,9. kyu,t,true,false,false,true
+Kovács Károly,1. kyu,t,true,false,false,false
+Langa Szilárd,8. kyu,t,true,false,false,false
+Leloup Aaron ,9. kyu,t,true,false,true,true
+Leloup Maxim ,9. kyu,t,true,false,true,true
+Malamidesz Nikosz Leonidasz,8. kyu,t,true,false,false,false
+Megyesi Gréta,9. kyu,t,true,false,false,true
+Molnár Péter Mátyás,8. kyu,t,true,false,false,false
+Murányi Marcell Márk,10. kyu,t,true,false,true,true
+Nagy Cecília ,8. kyu,t,true,false,false,false
+Nagy Dóra Klaudia,7. kyu,t,true,false,false,false
+Nagy Levente,8. kyu,t,true,false,false,false
+Némedi Ákos ,1. kyu,t,true,false,false,false
+Németh Csilla,1. kyu,t,true,false,false,false
+Németh György,1. kyu,t,true,false,false,false
+Pásztor Anna ,1. kyu,t,true,false,false,false
+Pazár Olivér,10. kyu,t,true,false,true,true
+Pór-Farkas Medárd,10. kyu,t,true,false,true,true
+Sárga Márton,1. kyu,t,true,false,false,false
+Szabó Baldvin Zoltán ,8. kyu,t,true,false,false,false
+Szentpéteri Dorina,8. kyu,t,true,false,false,false
+Szilvási András,6. kyu,t,true,false,false,false
+Szulcsán Dominik,8. kyu,t,true,false,false,false
+Tarnóci Balázs,7. kyu,t,true,false,false,false
+Téglási Nándor Imre,10. kyu,t,true,false,false,true
+Tóth Marcell ,8. kyu,t,true,false,false,false
+Tóth Márk Barnabás,8. kyu,t,true,false,false,false
+Ungvári László Richárd,2. kyu,t,true,false,false,false
+Varga-Jarabik Alex,8. kyu,t,true,false,false,false

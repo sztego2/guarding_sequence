@@ -1,51 +1,51 @@
 Nap,Óra,Név1,Név2
-1,12,Németh György,Kovács Károly
-1,14,Jankovics Szilvia,Némedi Ákos
-1,16,Sirokai Soma,Tóth Olivér
-1,18,Nagy Levente,Tóth Béla
-1,20,Sárkány Viktor,Szendrei Márton
-1,22,Janisch Ádám,Pásztor Anna
-2,0,Horváth Ágoston,Németh Csilla
-2,2,Kecskés Bence,Berényi Lilla
-2,4,Bacskó Zétény,Kötél Zsigmond
-2,6,Pór-Farkas Medárd,Leloup Aaron
-2,8,Leloup Maxim,Keltai Dóra
-2,10,Bacskó Gergő,Szendrei Ábel
-2,12,Tóth Marcell,Németh György
-2,14,Kovács Károly,Jankovics Szilvia
-2,16,Némedi Ákos,Sirokai Soma
-2,18,Tóth Olivér,Nagy Levente
-2,20,Tóth Béla,Sárkány Viktor
-2,22,Szendrei Márton,Janisch Ádám
-3,0,Pásztor Anna,Horváth Ágoston
-3,2,Németh Csilla,Kecskés Bence
-3,4,Berényi Lilla,Bacskó Zétény
-3,6,Pór-Farkas Medárd,Leloup Aaron
-3,8,Leloup Maxim,Kötél Zsigmond
-3,10,Keltai Dóra,Bacskó Gergő
-3,12,Szendrei Ábel,Tóth Marcell
-3,14,Németh György,Kovács Károly
-3,16,Jankovics Szilvia,Némedi Ákos
-3,18,Sirokai Soma,Tóth Olivér
-3,20,Nagy Levente,Tóth Béla
-3,22,Sárkány Viktor,Szendrei Márton
-4,0,Janisch Ádám,Pásztor Anna
-4,2,Horváth Ágoston,Németh Csilla
-4,4,Kecskés Bence,Berényi Lilla
-4,6,Pór-Farkas Medárd,Leloup Aaron
-4,8,Leloup Maxim,Bacskó Zétény
-4,10,Kötél Zsigmond,Keltai Dóra
-4,12,Bacskó Gergő,Szendrei Ábel
-4,14,Tóth Marcell,Németh György
-4,16,Kovács Károly,Jankovics Szilvia
-4,18,Némedi Ákos,Sirokai Soma
-4,20,Tóth Olivér,Nagy Levente
-4,22,Tóth Béla,Sárkány Viktor
-5,0,Szendrei Márton,Janisch Ádám
-5,2,Pásztor Anna,Horváth Ágoston
-5,4,Németh Csilla,Kecskés Bence
-5,6,Németh György,Kovács Károly
-5,8,Jankovics Szilvia,Némedi Ákos
-5,10,Pór-Farkas Medárd,Leloup Aaron
-5,12,Leloup Maxim,Berényi Lilla
-5,14,Bacskó Zétény,Kötél Zsigmond
+1,12,Pazár Olivér,Leloup Aaron 
+1,14,Csamangó Zsolt ,Németh Csilla
+1,16,Dóczy László,Dóczy Lilla
+1,18,Bartos Tamás ,Nagy Levente
+1,20,Nagy Dóra Klaudia,Megyesi Gréta
+1,22,Ungvári László Richárd,Szilvási András
+2,0,Molnár Péter Mátyás,Kovács Károly
+2,2,Besenyei Csaba ,Némedi Ákos 
+2,4,Fejér György,Bezzeg Norbert
+2,6,Farkas Zoltán Zsigmond,Bacsko Zeteny
+2,8,Kötél Zsigmond Lajos,Horváth István
+2,10,Tarnóci Balázs,Varga-Jarabik Alex
+2,12,Csósza Zalán László,Murányi Marcell Márk
+2,14,Langa Szilárd,Gubán Ákos 
+2,16,Burján Tímea,Szulcsán Dominik
+2,18,Gere Tamás,Al-Assaf Meymoona
+2,20,Pásztor Anna ,Horváth Ágoston
+2,22,Jankovics Szilvia Mária,Farkas Alexandra
+3,0,Sárga Márton,Tóth Márk Barnabás
+3,2,Szabó Baldvin Zoltán ,Falcsik Gergő
+3,4,Hunyadi Ivett ,Fekete Réka Boglárka
+3,6,Szentpéteri Dorina,Kolozsvári Barnabás
+3,8,Pór-Farkas Medárd,Leloup Maxim 
+3,10,Tóth Marcell ,Németh György
+3,12,Téglási Nándor Imre,Détári Péter
+3,14,Malamidesz Nikosz Leonidasz,Kiss Rebeka
+3,16,Nagy Cecília ,Pazár Olivér
+3,18,Leloup Aaron ,Csamangó Zsolt 
+3,20,Németh Csilla,Dóczy László
+3,22,Dóczy Lilla,Bartos Tamás 
+4,0,Nagy Levente,Nagy Dóra Klaudia
+4,2,Megyesi Gréta,Ungvári László Richárd
+4,4,Szilvási András,Molnár Péter Mátyás
+4,6,Kovács Károly,Besenyei Csaba 
+4,8,Némedi Ákos ,Fejér György
+4,10,Bezzeg Norbert,Farkas Zoltán Zsigmond
+4,12,Bacsko Zeteny,Kötél Zsigmond Lajos
+4,14,Horváth István,Tarnóci Balázs
+4,16,Varga-Jarabik Alex,Csósza Zalán László
+4,18,Murányi Marcell Márk,Langa Szilárd
+4,20,Gubán Ákos ,Burján Tímea
+4,22,Szulcsán Dominik,Gere Tamás
+5,0,Al-Assaf Meymoona,Pásztor Anna 
+5,2,Horváth Ágoston,Jankovics Szilvia Mária
+5,4,Farkas Alexandra,Sárga Márton
+5,6,Tóth Márk Barnabás,Szabó Baldvin Zoltán 
+5,8,Pór-Farkas Medárd,Leloup Maxim 
+5,10,Falcsik Gergő,Hunyadi Ivett 
+5,12,Fekete Réka Boglárka,Szentpéteri Dorina
+5,14,Kolozsvári Barnabás,Tóth Marcell 
